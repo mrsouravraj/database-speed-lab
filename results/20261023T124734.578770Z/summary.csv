@@ -1,0 +1,2 @@
+name,journal,synchronous,batch_size,repeats,events_per_second_median,events_per_second_min,events_per_second_max,commits_per_second_median,batch_p95_ms_median,batch_p99_ms_median,commit_p50_ms_median
+wal-full-batch-1000,WAL,FULL,1000,3,174491.2376316836,164682.6920796182,179176.54034259607,174.4912376316836,8.334625,17.932625,2.967417

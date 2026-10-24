@@ -1,0 +1,734 @@
+{
+  "format_version": 1,
+  "run_id": "20261023T124734.578770Z",
+  "status": "complete",
+  "config": {
+    "seconds": 30.0,
+    "repeats": 3,
+    "warmup": 1.0,
+    "seed": 42,
+    "cases": [
+      "wal-full-batch-1000"
+    ],
+    "checkpoint_pages": 1000,
+    "fullfsync": true,
+    "notes": "Longer follow-up to the initial article matrix. Same local development machine; background applications not controlled. No power-failure testing."
+  },
+  "machine": {
+    "os": "Darwin",
+    "os_release": "27.0.0",
+    "architecture": "arm64",
+    "python": "3.13.0",
+    "python_implementation": "CPython",
+    "sqlite": "3.45.3",
+    "logical_cpus": 11,
+    "cpu": "Apple M3 Pro",
+    "memory_bytes": 19327352832,
+    "storage": {
+      "FilesystemType": "apfs",
+      "FilesystemName": "APFS",
+      "SolidState": true,
+      "BusProtocol": "Apple Fabric",
+      "TotalSize": 494384795648,
+      "total_bytes": 494384795648,
+      "free_bytes": 13551689728
+    },
+    "load_average": [
+      16.75732421875,
+      14.748046875,
+      11.49462890625
+    ],
+    "os_version": "27.0.1",
+    "power_status": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=40108131)\t100%; charged; 0:00 remaining present: true",
+    "sqlite_compile_options": [
+      "ATOMIC_INTRINSICS=1",
+      "COMPILER=clang-15.0.0",
+      "DEFAULT_AUTOVACUUM",
+      "DEFAULT_CACHE_SIZE=-2000",
+      "DEFAULT_FILE_FORMAT=4",
+      "DEFAULT_JOURNAL_SIZE_LIMIT=-1",
+      "DEFAULT_MMAP_SIZE=0",
+      "DEFAULT_PAGE_SIZE=4096",
+      "DEFAULT_PCACHE_INITSZ=20",
+      "DEFAULT_RECURSIVE_TRIGGERS",
+      "DEFAULT_SECTOR_SIZE=4096",
+      "DEFAULT_SYNCHRONOUS=2",
+      "DEFAULT_WAL_AUTOCHECKPOINT=1000",
+      "DEFAULT_WAL_SYNCHRONOUS=2",
+      "DEFAULT_WORKER_THREADS=0",
+      "DIRECT_OVERFLOW_READ",
+      "ENABLE_FTS3",
+      "ENABLE_FTS3_PARENTHESIS",
+      "ENABLE_FTS4",
+      "ENABLE_FTS5",
+      "ENABLE_GEOPOLY",
+      "ENABLE_MATH_FUNCTIONS",
+      "ENABLE_RTREE",
+      "MALLOC_SOFT_LIMIT=1024",
+      "MAX_ATTACHED=10",
+      "MAX_COLUMN=2000",
+      "MAX_COMPOUND_SELECT=500",
+      "MAX_DEFAULT_PAGE_SIZE=8192",
+      "MAX_EXPR_DEPTH=1000",
+      "MAX_FUNCTION_ARG=127",
+      "MAX_LENGTH=1000000000",
+      "MAX_LIKE_PATTERN_LENGTH=50000",
+      "MAX_MMAP_SIZE=0x7fff0000",
+      "MAX_PAGE_COUNT=0xfffffffe",
+      "MAX_PAGE_SIZE=65536",
+      "MAX_SQL_LENGTH=1000000000",
+      "MAX_TRIGGER_DEPTH=1000",
+      "MAX_VARIABLE_NUMBER=32766",
+      "MAX_VDBE_OP=250000000",
+      "MAX_WORKER_THREADS=8",
+      "MUTEX_PTHREADS",
+      "OMIT_AUTOINIT",
+      "SYSTEM_MALLOC",
+      "TCL",
+      "TEMP_STORE=1",
+      "THREADSAFE=1"
+    ]
+  },
+  "trials": [
+    {
+      "case": {
+        "name": "wal-full-batch-1000",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 1000
+      },
+      "repeat": 1,
+      "order": 1,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 201000,
+        "commits": 201,
+        "elapsed_seconds": 1.002717583
+      },
+      "events": 4941000,
+      "commits": 4941,
+      "elapsed_seconds": 30.003152958,
+      "process_cpu_seconds": 13.909664,
+      "process_cpu_fraction": 0.4636067422471059,
+      "events_per_second": 164682.6920796182,
+      "commits_per_second": 164.6826920796182,
+      "batch_latency": {
+        "count": 4941,
+        "p50_ms": 5.405125,
+        "p95_ms": 9.171084,
+        "p99_ms": 20.219208,
+        "max_ms": 74.831917
+      },
+      "commit_latency": {
+        "count": 4941,
+        "p50_ms": 3.089167,
+        "p95_ms": 5.979167,
+        "p99_ms": 17.571917,
+        "max_ms": 72.290958
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.000523208,
+          "events_per_second": 177906.91767741583,
+          "wal_bytes": 4214792
+        },
+        {
+          "elapsed_seconds": 2.002413291,
+          "events_per_second": 191637.78867347067,
+          "wal_bytes": 4214792
+        },
+        {
+          "elapsed_seconds": 3.00757525,
+          "events_per_second": 155198.8697972602,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 4.01041525,
+          "events_per_second": 151569.54249930198,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 5.011523375,
+          "events_per_second": 183796.33069105298,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 6.016459875,
+          "events_per_second": 174140.3561319546,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 7.018516541,
+          "events_per_second": 182624.40260040143,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 8.023717916,
+          "events_per_second": 182053.07369381582,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 9.028526625,
+          "events_per_second": 160229.5029471127,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 10.02862975,
+          "events_per_second": 166982.77990082273,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 11.032582666,
+          "events_per_second": 140444.83337105025,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 12.044929791,
+          "events_per_second": 133353.46806067138,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 13.049760416,
+          "events_per_second": 134351.00069725682,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 14.052536375,
+          "events_per_second": 129640.12433010472,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 15.055417708,
+          "events_per_second": 193442.6273741402,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 16.061219916,
+          "events_per_second": 182938.55246736543,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 17.06237325,
+          "events_per_second": 141836.41523986575,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 18.065388375,
+          "events_per_second": 162510.0120000683,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 19.070821875,
+          "events_per_second": 165102.91332047322,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 20.07524475,
+          "events_per_second": 158299.85950887468,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 21.077523916,
+          "events_per_second": 177595.23098777054,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 22.078867,
+          "events_per_second": 189745.15631647385,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 23.083521375,
+          "events_per_second": 181156.8281878034,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 24.0884385,
+          "events_per_second": 179119.24826636823,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 25.089531458,
+          "events_per_second": 97893.00705479541,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 26.090512541,
+          "events_per_second": 161841.22033003494,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 27.091398666,
+          "events_per_second": 129884.905737903,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 28.092388625,
+          "events_per_second": 185816.0497292261,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 29.093281208,
+          "events_per_second": 190829.66868183896,
+          "wal_bytes": 4235392
+        },
+        {
+          "elapsed_seconds": 30.003152958,
+          "events_per_second": 180245.18290627224,
+          "wal_bytes": 4235392
+        }
+      ],
+      "wal_bytes_end": 4235392,
+      "wal_bytes_max_sampled": 4235392,
+      "database_bytes_before_final_checkpoint": 339910656,
+      "database_bytes_final": 340840448,
+      "final_checkpoint": {
+        "elapsed_ms": 5.519375,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 5142000,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-1000",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 1000
+      },
+      "repeat": 2,
+      "order": 2,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 80000,
+        "commits": 80,
+        "elapsed_seconds": 1.00859
+      },
+      "events": 5377000,
+      "commits": 5377,
+      "elapsed_seconds": 30.009509,
+      "process_cpu_seconds": 14.331784,
+      "process_cpu_fraction": 0.47757475805418875,
+      "events_per_second": 179176.54034259607,
+      "commits_per_second": 179.17654034259607,
+      "batch_latency": {
+        "count": 5377,
+        "p50_ms": 5.066166,
+        "p95_ms": 8.00725,
+        "p99_ms": 17.932625,
+        "max_ms": 46.517458
+      },
+      "commit_latency": {
+        "count": 5377,
+        "p50_ms": 2.926541,
+        "p95_ms": 5.640459,
+        "p99_ms": 15.548542,
+        "max_ms": 44.426417
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.0027645,
+          "events_per_second": 83768.42219683685,
+          "wal_bytes": 4181832
+        },
+        {
+          "elapsed_seconds": 2.006464875,
+          "events_per_second": 200258.96672600126,
+          "wal_bytes": 4206552
+        },
+        {
+          "elapsed_seconds": 3.006589792,
+          "events_per_second": 176977.8924526085,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 4.008519209,
+          "events_per_second": 199614.85969624945,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 5.00858125,
+          "events_per_second": 196987.77868122284,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 6.010509667,
+          "events_per_second": 189634.3059805639,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 7.012612792,
+          "events_per_second": 183613.83714874653,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 8.013674709,
+          "events_per_second": 189798.44979958417,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 9.017591375,
+          "events_per_second": 194239.22981272632,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 10.020595125,
+          "events_per_second": 185442.97566185571,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 11.023320667,
+          "events_per_second": 192475.40021275333,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 12.028602709,
+          "events_per_second": 198949.14227464137,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 13.029728584,
+          "events_per_second": 161817.81336937274,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 14.03358175,
+          "events_per_second": 178312.9306781506,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 15.03754,
+          "events_per_second": 182278.4961426434,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 16.040476459,
+          "events_per_second": 189443.70632357278,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 17.041376959,
+          "events_per_second": 187830.85831208996,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 18.041466084,
+          "events_per_second": 185983.42422731573,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 19.048531917,
+          "events_per_second": 170793.20374480422,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 20.052544084,
+          "events_per_second": 154380.59925423196,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 21.05356575,
+          "events_per_second": 167828.5352916627,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 22.055455625,
+          "events_per_second": 185649.14631959924,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 23.057545625,
+          "events_per_second": 176630.84154117893,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 24.060599625,
+          "events_per_second": 188424.55141996342,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 25.063611834,
+          "events_per_second": 170486.4591533601,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 26.068614167,
+          "events_per_second": 172138.90388053458,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 27.072581875,
+          "events_per_second": 177296.53910342703,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 28.07488225,
+          "events_per_second": 176593.7681106824,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 29.077505375,
+          "events_per_second": 174542.15411199498,
+          "wal_bytes": 4223032
+        },
+        {
+          "elapsed_seconds": 30.009509,
+          "events_per_second": 183475.68122387936,
+          "wal_bytes": 4223032
+        }
+      ],
+      "wal_bytes_end": 4223032,
+      "wal_bytes_max_sampled": 4223032,
+      "database_bytes_before_final_checkpoint": 361865216,
+      "database_bytes_final": 361865216,
+      "final_checkpoint": {
+        "elapsed_ms": 1.2235,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 5457000,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-1000",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 1000
+      },
+      "repeat": 3,
+      "order": 3,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 78000,
+        "commits": 78,
+        "elapsed_seconds": 1.011968666
+      },
+      "events": 5235000,
+      "commits": 5235,
+      "elapsed_seconds": 30.0015065,
+      "process_cpu_seconds": 13.97552,
+      "process_cpu_fraction": 0.46582727437370514,
+      "events_per_second": 174491.2376316836,
+      "commits_per_second": 174.4912376316836,
+      "batch_latency": {
+        "count": 5235,
+        "p50_ms": 5.115334,
+        "p95_ms": 8.334625,
+        "p99_ms": 17.554542,
+        "max_ms": 44.361875
+      },
+      "commit_latency": {
+        "count": 5235,
+        "p50_ms": 2.967417,
+        "p95_ms": 5.922208,
+        "p99_ms": 15.248916,
+        "max_ms": 41.425458
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.00397125,
+          "events_per_second": 91636.09017688505,
+          "wal_bytes": 4198312
+        },
+        {
+          "elapsed_seconds": 2.006296208,
+          "events_per_second": 168607.993496656,
+          "wal_bytes": 4202432
+        },
+        {
+          "elapsed_seconds": 3.01174925,
+          "events_per_second": 177034.62276659958,
+          "wal_bytes": 4202432
+        },
+        {
+          "elapsed_seconds": 4.01651875,
+          "events_per_second": 175164.55266605923,
+          "wal_bytes": 4202432
+        },
+        {
+          "elapsed_seconds": 5.020509041,
+          "events_per_second": 184264.73010584124,
+          "wal_bytes": 4206552
+        },
+        {
+          "elapsed_seconds": 6.021166875,
+          "events_per_second": 188875.75110914485,
+          "wal_bytes": 4206552
+        },
+        {
+          "elapsed_seconds": 7.023571083,
+          "events_per_second": 181563.4836201725,
+          "wal_bytes": 4206552
+        },
+        {
+          "elapsed_seconds": 8.028526416,
+          "events_per_second": 170156.8163129495,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 9.03547025,
+          "events_per_second": 163862.16830441408,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 10.036563166,
+          "events_per_second": 173810.04022607626,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 11.038532791,
+          "events_per_second": 172659.92469582098,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 12.041478458,
+          "events_per_second": 177477.21123561123,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 13.041628125,
+          "events_per_second": 179973.06397143457,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 14.043467625,
+          "events_per_second": 166693.36755039106,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 15.048552291,
+          "events_per_second": 177099.50815228137,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 16.050569125,
+          "events_per_second": 176643.73890149634,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 17.051489708,
+          "events_per_second": 181832.60799223668,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 18.052226458,
+          "events_per_second": 187861.59297137833,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 19.055602791,
+          "events_per_second": 171421.22486159936,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 20.059503583,
+          "events_per_second": 184281.15753493697,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 21.071567208,
+          "events_per_second": 161057.06792890615,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 22.074530625,
+          "events_per_second": 172488.84362848103,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 23.0776615,
+          "events_per_second": 182428.83811147773,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 24.082449708,
+          "events_per_second": 176156.5259133694,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 25.083049291,
+          "events_per_second": 176893.93740233048,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 26.084504583,
+          "events_per_second": 182734.06857187988,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 27.085553375,
+          "events_per_second": 182808.27214663877,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 28.086426208,
+          "events_per_second": 185837.7946401908,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 29.088493166,
+          "events_per_second": 186614.27612904087,
+          "wal_bytes": 4218912
+        },
+        {
+          "elapsed_seconds": 30.0015065,
+          "events_per_second": 177434.42945160755,
+          "wal_bytes": 4218912
+        }
+      ],
+      "wal_bytes_end": 4218912,
+      "wal_bytes_max_sampled": 4218912,
+      "database_bytes_before_final_checkpoint": 350932992,
+      "database_bytes_final": 352264192,
+      "final_checkpoint": {
+        "elapsed_ms": 7.332458,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 5313000,
+      "integrity": "ok"
+    }
+  ],
+  "source": {
+    "benchmark_sha256": "cbfeede9d592ae4954e74298dd3e7d631e30e838323c695d8f56c28811651dc3",
+    "git_commit": null,
+    "git_dirty": true
+  },
+  "schema": "CREATE TABLE payment_events (\n    event_id TEXT PRIMARY KEY NOT NULL,\n    amount_minor INTEGER NOT NULL CHECK (amount_minor > 0),\n    status TEXT NOT NULL CHECK (status IN ('captured', 'refunded', 'failed'))\n);",
+  "finished_at": "2026-10-23T12:49:19.666892+00:00"
+}

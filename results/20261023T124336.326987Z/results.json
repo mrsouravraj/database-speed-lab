@@ -1,0 +1,2406 @@
+{
+  "format_version": 1,
+  "run_id": "20261023T124336.326987Z",
+  "status": "complete",
+  "config": {
+    "seconds": 5.0,
+    "repeats": 3,
+    "warmup": 0.25,
+    "seed": 42,
+    "cases": [
+      "delete-full",
+      "delete-extra",
+      "wal-full",
+      "wal-normal",
+      "wal-off",
+      "wal-full-batch-10",
+      "wal-full-batch-100",
+      "wal-full-batch-1000",
+      "wal-full-batch-28000"
+    ],
+    "checkpoint_pages": 1000,
+    "fullfsync": true,
+    "notes": "Initial article measurements on the local development machine. Background applications were not controlled. No power-failure testing."
+  },
+  "machine": {
+    "os": "Darwin",
+    "os_release": "27.0.0",
+    "architecture": "arm64",
+    "python": "3.13.0",
+    "python_implementation": "CPython",
+    "sqlite": "3.45.3",
+    "logical_cpus": 11,
+    "cpu": "Apple M3 Pro",
+    "memory_bytes": 19327352832,
+    "storage": {
+      "FilesystemType": "apfs",
+      "FilesystemName": "APFS",
+      "SolidState": true,
+      "BusProtocol": "Apple Fabric",
+      "TotalSize": 494384795648,
+      "total_bytes": 494384795648,
+      "free_bytes": 12532707328
+    },
+    "load_average": [
+      22.07177734375,
+      13.0595703125,
+      10.06396484375
+    ],
+    "os_version": "27.0.1",
+    "power_status": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=40108131)\t100%; charged; 0:00 remaining present: true",
+    "sqlite_compile_options": [
+      "ATOMIC_INTRINSICS=1",
+      "COMPILER=clang-15.0.0",
+      "DEFAULT_AUTOVACUUM",
+      "DEFAULT_CACHE_SIZE=-2000",
+      "DEFAULT_FILE_FORMAT=4",
+      "DEFAULT_JOURNAL_SIZE_LIMIT=-1",
+      "DEFAULT_MMAP_SIZE=0",
+      "DEFAULT_PAGE_SIZE=4096",
+      "DEFAULT_PCACHE_INITSZ=20",
+      "DEFAULT_RECURSIVE_TRIGGERS",
+      "DEFAULT_SECTOR_SIZE=4096",
+      "DEFAULT_SYNCHRONOUS=2",
+      "DEFAULT_WAL_AUTOCHECKPOINT=1000",
+      "DEFAULT_WAL_SYNCHRONOUS=2",
+      "DEFAULT_WORKER_THREADS=0",
+      "DIRECT_OVERFLOW_READ",
+      "ENABLE_FTS3",
+      "ENABLE_FTS3_PARENTHESIS",
+      "ENABLE_FTS4",
+      "ENABLE_FTS5",
+      "ENABLE_GEOPOLY",
+      "ENABLE_MATH_FUNCTIONS",
+      "ENABLE_RTREE",
+      "MALLOC_SOFT_LIMIT=1024",
+      "MAX_ATTACHED=10",
+      "MAX_COLUMN=2000",
+      "MAX_COMPOUND_SELECT=500",
+      "MAX_DEFAULT_PAGE_SIZE=8192",
+      "MAX_EXPR_DEPTH=1000",
+      "MAX_FUNCTION_ARG=127",
+      "MAX_LENGTH=1000000000",
+      "MAX_LIKE_PATTERN_LENGTH=50000",
+      "MAX_MMAP_SIZE=0x7fff0000",
+      "MAX_PAGE_COUNT=0xfffffffe",
+      "MAX_PAGE_SIZE=65536",
+      "MAX_SQL_LENGTH=1000000000",
+      "MAX_TRIGGER_DEPTH=1000",
+      "MAX_VARIABLE_NUMBER=32766",
+      "MAX_VDBE_OP=250000000",
+      "MAX_WORKER_THREADS=8",
+      "MUTEX_PTHREADS",
+      "OMIT_AUTOINIT",
+      "SYSTEM_MALLOC",
+      "TCL",
+      "TEMP_STORE=1",
+      "THREADSAFE=1"
+    ]
+  },
+  "trials": [
+    {
+      "case": {
+        "name": "wal-normal",
+        "journal": "WAL",
+        "synchronous": "NORMAL",
+        "batch_size": 1
+      },
+      "repeat": 1,
+      "order": 1,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 1,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 4875,
+        "commits": 4875,
+        "elapsed_seconds": 0.250014834
+      },
+      "events": 100924,
+      "commits": 100924,
+      "elapsed_seconds": 5.00116475,
+      "process_cpu_seconds": 2.780601,
+      "process_cpu_fraction": 0.555990681970635,
+      "events_per_second": 20180.09904592725,
+      "commits_per_second": 20180.09904592725,
+      "batch_latency": {
+        "count": 100924,
+        "p50_ms": 0.023541,
+        "p95_ms": 0.047583,
+        "p99_ms": 0.088416,
+        "max_ms": 35.97725
+      },
+      "commit_latency": {
+        "count": 100924,
+        "p50_ms": 0.0185,
+        "p95_ms": 0.041333,
+        "p99_ms": 0.076416,
+        "max_ms": 35.951166
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.002370125,
+          "events_per_second": 19779.121010814244,
+          "wal_bytes": 4128272
+        },
+        {
+          "elapsed_seconds": 2.008787458,
+          "events_per_second": 19307.09991060935,
+          "wal_bytes": 4136512
+        },
+        {
+          "elapsed_seconds": 3.016639458,
+          "events_per_second": 19325.258073606044,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 4.016649792,
+          "events_per_second": 19728.796122620868,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 5.00116475,
+          "events_per_second": 22814.28008532096,
+          "wal_bytes": 4144752
+        }
+      ],
+      "wal_bytes_end": 4144752,
+      "wal_bytes_max_sampled": 4144752,
+      "database_bytes_before_final_checkpoint": 6909952,
+      "database_bytes_final": 6909952,
+      "final_checkpoint": {
+        "elapsed_ms": 4.628708,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 105799,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-100",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 100
+      },
+      "repeat": 1,
+      "order": 2,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 7900,
+        "commits": 79,
+        "elapsed_seconds": 0.251324875
+      },
+      "events": 165200,
+      "commits": 1652,
+      "elapsed_seconds": 5.0017215,
+      "process_cpu_seconds": 0.93032,
+      "process_cpu_fraction": 0.1859999602136984,
+      "events_per_second": 33028.62824329583,
+      "commits_per_second": 330.28628243295833,
+      "batch_latency": {
+        "count": 1652,
+        "p50_ms": 3.0125,
+        "p95_ms": 4.551125,
+        "p99_ms": 6.95475,
+        "max_ms": 21.806625
+      },
+      "commit_latency": {
+        "count": 1652,
+        "p50_ms": 2.74725,
+        "p95_ms": 4.09525,
+        "p99_ms": 6.54675,
+        "max_ms": 21.25975
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.000647458,
+          "events_per_second": 33378.38889508277,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 2.001627083,
+          "events_per_second": 33367.31254644669,
+          "wal_bytes": 4152992
+        },
+        {
+          "elapsed_seconds": 3.001628875,
+          "events_per_second": 37599.93262092074,
+          "wal_bytes": 4152992
+        },
+        {
+          "elapsed_seconds": 4.003386292,
+          "events_per_second": 30745.966515763765,
+          "wal_bytes": 4152992
+        },
+        {
+          "elapsed_seconds": 5.0017215,
+          "events_per_second": 30050.027044623672,
+          "wal_bytes": 4152992
+        }
+      ],
+      "wal_bytes_end": 4152992,
+      "wal_bytes_max_sampled": 4152992,
+      "database_bytes_before_final_checkpoint": 11239424,
+      "database_bytes_final": 11325440,
+      "final_checkpoint": {
+        "elapsed_ms": 5.153208,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 173100,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-1000",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 1000
+      },
+      "repeat": 1,
+      "order": 3,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 45000,
+        "commits": 45,
+        "elapsed_seconds": 0.251231291
+      },
+      "events": 882000,
+      "commits": 882,
+      "elapsed_seconds": 5.001121541,
+      "process_cpu_seconds": 2.428868,
+      "process_cpu_fraction": 0.4856646614339902,
+      "events_per_second": 176360.44090694896,
+      "commits_per_second": 176.36044090694895,
+      "batch_latency": {
+        "count": 882,
+        "p50_ms": 5.242833,
+        "p95_ms": 8.225416,
+        "p99_ms": 16.899875,
+        "max_ms": 27.109041
+      },
+      "commit_latency": {
+        "count": 882,
+        "p50_ms": 3.005958,
+        "p95_ms": 4.942375,
+        "p99_ms": 14.212875,
+        "max_ms": 22.677916
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.002226333,
+          "events_per_second": 182593.48609631872,
+          "wal_bytes": 4202432
+        },
+        {
+          "elapsed_seconds": 2.004198333,
+          "events_per_second": 163677.22850538738,
+          "wal_bytes": 4202432
+        },
+        {
+          "elapsed_seconds": 3.005783166,
+          "events_per_second": 161743.66330485357,
+          "wal_bytes": 4202432
+        },
+        {
+          "elapsed_seconds": 4.005985791,
+          "events_per_second": 186962.11680108318,
+          "wal_bytes": 4202432
+        },
+        {
+          "elapsed_seconds": 5.001121541,
+          "events_per_second": 186909.17294449525,
+          "wal_bytes": 4202432
+        }
+      ],
+      "wal_bytes_end": 4202432,
+      "wal_bytes_max_sampled": 4202432,
+      "database_bytes_before_final_checkpoint": 60637184,
+      "database_bytes_final": 60825600,
+      "final_checkpoint": {
+        "elapsed_ms": 5.193209,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 927000,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-off",
+        "journal": "WAL",
+        "synchronous": "OFF",
+        "batch_size": 1
+      },
+      "repeat": 1,
+      "order": 4,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 0,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 11280,
+        "commits": 11280,
+        "elapsed_seconds": 0.25001375
+      },
+      "events": 205614,
+      "commits": 205614,
+      "elapsed_seconds": 5.000098167,
+      "process_cpu_seconds": 4.681968,
+      "process_cpu_fraction": 0.9363752157708387,
+      "events_per_second": 41121.99263546979,
+      "commits_per_second": 41121.99263546979,
+      "batch_latency": {
+        "count": 205614,
+        "p50_ms": 0.019667,
+        "p95_ms": 0.039833,
+        "p99_ms": 0.080542,
+        "max_ms": 8.719042
+      },
+      "commit_latency": {
+        "count": 205614,
+        "p50_ms": 0.014875,
+        "p95_ms": 0.033917,
+        "p99_ms": 0.066041,
+        "max_ms": 8.714167
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.000001125,
+          "events_per_second": 45172.94918043217,
+          "wal_bytes": 4136512
+        },
+        {
+          "elapsed_seconds": 2.000017875,
+          "events_per_second": 44283.25825542422,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 3.00002775,
+          "events_per_second": 43553.56990849716,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 4.000035708,
+          "events_per_second": 43804.65140258414,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 5.000055292,
+          "events_per_second": 28797.43603101277,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 5.000098167,
+          "events_per_second": 0.0,
+          "wal_bytes": 4144752
+        }
+      ],
+      "wal_bytes_end": 4144752,
+      "wal_bytes_max_sampled": 4144752,
+      "database_bytes_before_final_checkpoint": 14176256,
+      "database_bytes_final": 14196736,
+      "final_checkpoint": {
+        "elapsed_ms": 0.885542,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 216894,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-28000",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 28000
+      },
+      "repeat": 1,
+      "order": 5,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 56000,
+        "commits": 2,
+        "elapsed_seconds": 0.294263042
+      },
+      "events": 1344000,
+      "commits": 48,
+      "elapsed_seconds": 5.055409,
+      "process_cpu_seconds": 3.88216,
+      "process_cpu_fraction": 0.7679220415202805,
+      "events_per_second": 265853.86068664276,
+      "commits_per_second": 9.49478073880867,
+      "batch_latency": {
+        "count": 48,
+        "p50_ms": 89.985334,
+        "p95_ms": 153.795959,
+        "p99_ms": 311.941291,
+        "max_ms": 311.941291
+      },
+      "commit_latency": {
+        "count": 48,
+        "p50_ms": 13.94475,
+        "p95_ms": 69.274334,
+        "p99_ms": 205.571333,
+        "max_ms": 205.571333
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.0698935,
+          "events_per_second": 261708.29152621265,
+          "wal_bytes": 5726832
+        },
+        {
+          "elapsed_seconds": 2.11855125,
+          "events_per_second": 320409.59025954845,
+          "wal_bytes": 5726832
+        },
+        {
+          "elapsed_seconds": 3.120440541,
+          "events_per_second": 223577.5968584537,
+          "wal_bytes": 5726832
+        },
+        {
+          "elapsed_seconds": 4.124469333,
+          "events_per_second": 278876.46472990786,
+          "wal_bytes": 5726832
+        },
+        {
+          "elapsed_seconds": 5.055409,
+          "events_per_second": 240617.09683276393,
+          "wal_bytes": 5726832
+        }
+      ],
+      "wal_bytes_end": 5726832,
+      "wal_bytes_max_sampled": 5726832,
+      "database_bytes_before_final_checkpoint": 91910144,
+      "database_bytes_final": 91910144,
+      "final_checkpoint": {
+        "elapsed_ms": 0.905625,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 1400000,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 1
+      },
+      "repeat": 1,
+      "order": 6,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 98,
+        "commits": 98,
+        "elapsed_seconds": 0.250432333
+      },
+      "events": 2144,
+      "commits": 2144,
+      "elapsed_seconds": 5.003752625,
+      "process_cpu_seconds": 0.531507,
+      "process_cpu_fraction": 0.10622167797513771,
+      "events_per_second": 428.478416236654,
+      "commits_per_second": 428.478416236654,
+      "batch_latency": {
+        "count": 2144,
+        "p50_ms": 1.928792,
+        "p95_ms": 3.733833,
+        "p99_ms": 4.871417,
+        "max_ms": 12.352708
+      },
+      "commit_latency": {
+        "count": 2144,
+        "p50_ms": 1.876375,
+        "p95_ms": 3.620709,
+        "p99_ms": 4.647041,
+        "max_ms": 12.290292
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.002516708,
+          "events_per_second": 337.1514881525546,
+          "wal_bytes": 2896392
+        },
+        {
+          "elapsed_seconds": 2.003382166,
+          "events_per_second": 498.56850989456365,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 3.004447541,
+          "events_per_second": 392.58175321466894,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 4.0075185,
+          "events_per_second": 449.6192377552424,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 5.003752625,
+          "events_per_second": 464.75019112600665,
+          "wal_bytes": 4124152
+        }
+      ],
+      "wal_bytes_end": 4124152,
+      "wal_bytes_max_sampled": 4124152,
+      "database_bytes_before_final_checkpoint": 135168,
+      "database_bytes_final": 155648,
+      "final_checkpoint": {
+        "elapsed_ms": 3.552083,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 2242,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-10",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 10
+      },
+      "repeat": 1,
+      "order": 7,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 680,
+        "commits": 68,
+        "elapsed_seconds": 0.252151958
+      },
+      "events": 18480,
+      "commits": 1848,
+      "elapsed_seconds": 5.003067583,
+      "process_cpu_seconds": 0.674661,
+      "process_cpu_fraction": 0.13484946761311817,
+      "events_per_second": 3693.7338329774866,
+      "commits_per_second": 369.37338329774866,
+      "batch_latency": {
+        "count": 1848,
+        "p50_ms": 2.605083,
+        "p95_ms": 4.520875,
+        "p99_ms": 7.557834,
+        "max_ms": 23.732291
+      },
+      "commit_latency": {
+        "count": 1848,
+        "p50_ms": 2.471917,
+        "p95_ms": 4.208583,
+        "p99_ms": 7.058417,
+        "max_ms": 23.520458
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.000782583,
+          "events_per_second": 2947.6931854238715,
+          "wal_bytes": 3848112
+        },
+        {
+          "elapsed_seconds": 2.002066166,
+          "events_per_second": 3245.8337030379535,
+          "wal_bytes": 4120032
+        },
+        {
+          "elapsed_seconds": 3.004024416,
+          "events_per_second": 4481.224641845107,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 4.015119583,
+          "events_per_second": 4361.60723929165,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 5.003067583,
+          "events_per_second": 3421.2326964577082,
+          "wal_bytes": 4144752
+        }
+      ],
+      "wal_bytes_end": 4144752,
+      "wal_bytes_max_sampled": 4144752,
+      "database_bytes_before_final_checkpoint": 1044480,
+      "database_bytes_final": 1216512,
+      "final_checkpoint": {
+        "elapsed_ms": 8.491458,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 19160,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "delete-full",
+        "journal": "DELETE",
+        "synchronous": "FULL",
+        "batch_size": 1
+      },
+      "repeat": 1,
+      "order": 8,
+      "pragmas": {
+        "journal_mode": "delete",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 19,
+        "commits": 19,
+        "elapsed_seconds": 0.376294709
+      },
+      "events": 387,
+      "commits": 387,
+      "elapsed_seconds": 5.010077708,
+      "process_cpu_seconds": 0.647258,
+      "process_cpu_fraction": 0.12919120974240986,
+      "events_per_second": 77.24431087806194,
+      "commits_per_second": 77.24431087806194,
+      "batch_latency": {
+        "count": 387,
+        "p50_ms": 10.682167,
+        "p95_ms": 23.391375,
+        "p99_ms": 63.368084,
+        "max_ms": 185.326833
+      },
+      "commit_latency": {
+        "count": 387,
+        "p50_ms": 9.777792,
+        "p95_ms": 15.519042,
+        "p99_ms": 45.34225,
+        "max_ms": 65.216291
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.018772125,
+          "events_per_second": 36.31822965317195,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 2.034018333,
+          "events_per_second": 74.85868885904767,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 3.044604416,
+          "events_per_second": 78.17245985169578,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 4.052206541,
+          "events_per_second": 100.23797835876934,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 5.010077708,
+          "events_per_second": 98.13428281216862,
+          "wal_bytes": 0
+        }
+      ],
+      "wal_bytes_end": 0,
+      "wal_bytes_max_sampled": 0,
+      "database_bytes_before_final_checkpoint": 40960,
+      "database_bytes_final": 40960,
+      "final_checkpoint": null,
+      "verified_rows": 406,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "delete-extra",
+        "journal": "DELETE",
+        "synchronous": "EXTRA",
+        "batch_size": 1
+      },
+      "repeat": 1,
+      "order": 9,
+      "pragmas": {
+        "journal_mode": "delete",
+        "synchronous": 3,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 25,
+        "commits": 25,
+        "elapsed_seconds": 0.261531333
+      },
+      "events": 448,
+      "commits": 448,
+      "elapsed_seconds": 5.001410333,
+      "process_cpu_seconds": 0.843775,
+      "process_cpu_fraction": 0.16870741327354316,
+      "events_per_second": 89.57473395934619,
+      "commits_per_second": 89.57473395934619,
+      "batch_latency": {
+        "count": 448,
+        "p50_ms": 10.596292,
+        "p95_ms": 16.487,
+        "p99_ms": 29.0705,
+        "max_ms": 37.285417
+      },
+      "commit_latency": {
+        "count": 448,
+        "p50_ms": 9.792541,
+        "p95_ms": 14.146208,
+        "p99_ms": 19.790667,
+        "max_ms": 28.988125
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.002334041,
+          "events_per_second": 95.77645382992634,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 2.009444833,
+          "events_per_second": 85.39278963460855,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 3.014181208,
+          "events_per_second": 94.5521654871906,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 4.0214755,
+          "events_per_second": 88.35550911669417,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 5.001410333,
+          "events_per_second": 83.67903378734165,
+          "wal_bytes": 0
+        }
+      ],
+      "wal_bytes_end": 0,
+      "wal_bytes_max_sampled": 0,
+      "database_bytes_before_final_checkpoint": 45056,
+      "database_bytes_final": 45056,
+      "final_checkpoint": null,
+      "verified_rows": 473,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-1000",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 1000
+      },
+      "repeat": 2,
+      "order": 10,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 42000,
+        "commits": 42,
+        "elapsed_seconds": 0.25294425
+      },
+      "events": 869000,
+      "commits": 869,
+      "elapsed_seconds": 5.006079167,
+      "process_cpu_seconds": 2.582398,
+      "process_cpu_fraction": 0.5158524094111674,
+      "events_per_second": 173588.94476308627,
+      "commits_per_second": 173.5889447630863,
+      "batch_latency": {
+        "count": 869,
+        "p50_ms": 5.124125,
+        "p95_ms": 9.031666,
+        "p99_ms": 15.972833,
+        "max_ms": 22.462584
+      },
+      "commit_latency": {
+        "count": 869,
+        "p50_ms": 2.915292,
+        "p95_ms": 4.928417,
+        "p99_ms": 12.712833,
+        "max_ms": 20.339709
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.004937334,
+          "events_per_second": 169164.77699494048,
+          "wal_bytes": 4190072
+        },
+        {
+          "elapsed_seconds": 2.008193792,
+          "events_per_second": 177422.23195337757,
+          "wal_bytes": 4210672
+        },
+        {
+          "elapsed_seconds": 3.010424042,
+          "events_per_second": 168623.92648795026,
+          "wal_bytes": 4210672
+        },
+        {
+          "elapsed_seconds": 4.011003459,
+          "events_per_second": 177896.9234982774,
+          "wal_bytes": 4210672
+        },
+        {
+          "elapsed_seconds": 5.006079167,
+          "events_per_second": 174861.06695310865,
+          "wal_bytes": 4227152
+        }
+      ],
+      "wal_bytes_end": 4227152,
+      "wal_bytes_max_sampled": 4227152,
+      "database_bytes_before_final_checkpoint": 57753600,
+      "database_bytes_final": 59789312,
+      "final_checkpoint": {
+        "elapsed_ms": 6.415709,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 911000,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 1
+      },
+      "repeat": 2,
+      "order": 11,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 96,
+        "commits": 96,
+        "elapsed_seconds": 0.251934375
+      },
+      "events": 2064,
+      "commits": 2064,
+      "elapsed_seconds": 5.000251958,
+      "process_cpu_seconds": 0.673593,
+      "process_cpu_fraction": 0.13471181165627175,
+      "events_per_second": 412.77919939569574,
+      "commits_per_second": 412.77919939569574,
+      "batch_latency": {
+        "count": 2064,
+        "p50_ms": 2.193208,
+        "p95_ms": 3.864334,
+        "p99_ms": 5.259042,
+        "max_ms": 21.0445
+      },
+      "commit_latency": {
+        "count": 2064,
+        "p50_ms": 2.100875,
+        "p95_ms": 3.702292,
+        "p99_ms": 5.156125,
+        "max_ms": 20.877417
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.000792708,
+          "events_per_second": 358.7156432398786,
+          "wal_bytes": 3069432
+        },
+        {
+          "elapsed_seconds": 2.001549,
+          "events_per_second": 436.669750161311,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 3.001723875,
+          "events_per_second": 455.9202709426189,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 4.00263325,
+          "events_per_second": 429.6093240209684,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 5.000251958,
+          "events_per_second": 382.911824865257,
+          "wal_bytes": 4124152
+        }
+      ],
+      "wal_bytes_end": 4124152,
+      "wal_bytes_max_sampled": 4124152,
+      "database_bytes_before_final_checkpoint": 135168,
+      "database_bytes_final": 147456,
+      "final_checkpoint": {
+        "elapsed_ms": 3.8135,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 2160,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-10",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 10
+      },
+      "repeat": 2,
+      "order": 12,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 880,
+        "commits": 88,
+        "elapsed_seconds": 0.252640792
+      },
+      "events": 12610,
+      "commits": 1261,
+      "elapsed_seconds": 5.001406458,
+      "process_cpu_seconds": 0.60963,
+      "process_cpu_fraction": 0.12189171288505582,
+      "events_per_second": 2521.290782081843,
+      "commits_per_second": 252.1290782081843,
+      "batch_latency": {
+        "count": 1261,
+        "p50_ms": 3.808667,
+        "p95_ms": 6.183875,
+        "p99_ms": 9.361333,
+        "max_ms": 16.304375
+      },
+      "commit_latency": {
+        "count": 1261,
+        "p50_ms": 3.611625,
+        "p95_ms": 5.795083,
+        "p99_ms": 8.844417,
+        "max_ms": 16.203125
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.003215167,
+          "events_per_second": 2771.0904813304123,
+          "wal_bytes": 3654472
+        },
+        {
+          "elapsed_seconds": 2.007289833,
+          "events_per_second": 2689.043047720915,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 3.008383875,
+          "events_per_second": 2467.3006694410033,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 4.008749917,
+          "events_per_second": 2499.0852298442974,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 5.001406458,
+          "events_per_second": 2175.979214143918,
+          "wal_bytes": 4124152
+        }
+      ],
+      "wal_bytes_end": 4124152,
+      "wal_bytes_max_sampled": 4124152,
+      "database_bytes_before_final_checkpoint": 856064,
+      "database_bytes_final": 860160,
+      "final_checkpoint": {
+        "elapsed_ms": 9.916833,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 13490,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-100",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 100
+      },
+      "repeat": 2,
+      "order": 13,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 4000,
+        "commits": 40,
+        "elapsed_seconds": 0.253055208
+      },
+      "events": 115200,
+      "commits": 1152,
+      "elapsed_seconds": 5.001481167,
+      "process_cpu_seconds": 1.400287,
+      "process_cpu_fraction": 0.2799744622131455,
+      "events_per_second": 23033.176803722632,
+      "commits_per_second": 230.33176803722634,
+      "batch_latency": {
+        "count": 1152,
+        "p50_ms": 4.08075,
+        "p95_ms": 6.27925,
+        "p99_ms": 12.692458,
+        "max_ms": 30.533583
+      },
+      "commit_latency": {
+        "count": 1152,
+        "p50_ms": 3.360333,
+        "p95_ms": 5.19175,
+        "p99_ms": 10.594375,
+        "max_ms": 29.05375
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.00098275,
+          "events_per_second": 22877.51712005027,
+          "wal_bytes": 4120032
+        },
+        {
+          "elapsed_seconds": 2.001644292,
+          "events_per_second": 22784.926813945647,
+          "wal_bytes": 4132392
+        },
+        {
+          "elapsed_seconds": 3.002071334,
+          "events_per_second": 24089.712680917317,
+          "wal_bytes": 4152992
+        },
+        {
+          "elapsed_seconds": 4.00423875,
+          "events_per_second": 22151.987428016717,
+          "wal_bytes": 4152992
+        },
+        {
+          "elapsed_seconds": 5.001481167,
+          "events_per_second": 23264.152832359916,
+          "wal_bytes": 4152992
+        }
+      ],
+      "wal_bytes_end": 4152992,
+      "wal_bytes_max_sampled": 4152992,
+      "database_bytes_before_final_checkpoint": 7163904,
+      "database_bytes_final": 7782400,
+      "final_checkpoint": {
+        "elapsed_ms": 13.789292,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 119200,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "delete-full",
+        "journal": "DELETE",
+        "synchronous": "FULL",
+        "batch_size": 1
+      },
+      "repeat": 2,
+      "order": 14,
+      "pragmas": {
+        "journal_mode": "delete",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 15,
+        "commits": 15,
+        "elapsed_seconds": 0.356754291
+      },
+      "events": 357,
+      "commits": 357,
+      "elapsed_seconds": 5.011763041,
+      "process_cpu_seconds": 0.775903,
+      "process_cpu_fraction": 0.15481637772028098,
+      "events_per_second": 71.23241802923859,
+      "commits_per_second": 71.23241802923859,
+      "batch_latency": {
+        "count": 357,
+        "p50_ms": 11.801625,
+        "p95_ms": 23.434458,
+        "p99_ms": 83.299958,
+        "max_ms": 222.696209
+      },
+      "commit_latency": {
+        "count": 357,
+        "p50_ms": 10.423,
+        "p95_ms": 18.527,
+        "p99_ms": 71.487792,
+        "max_ms": 208.09875
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.009513833,
+          "events_per_second": 76.27433867961669,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 2.015315125,
+          "events_per_second": 71.58471615882553,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 3.097458625,
+          "events_per_second": 60.99006277818053,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 4.098417125,
+          "events_per_second": 61.940629906234875,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 5.011763041,
+          "events_per_second": 87.59003417933934,
+          "wal_bytes": 0
+        }
+      ],
+      "wal_bytes_end": 0,
+      "wal_bytes_max_sampled": 0,
+      "database_bytes_before_final_checkpoint": 40960,
+      "database_bytes_final": 40960,
+      "final_checkpoint": null,
+      "verified_rows": 372,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-normal",
+        "journal": "WAL",
+        "synchronous": "NORMAL",
+        "batch_size": 1
+      },
+      "repeat": 2,
+      "order": 15,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 1,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 4170,
+        "commits": 4170,
+        "elapsed_seconds": 0.255811125
+      },
+      "events": 90257,
+      "commits": 90257,
+      "elapsed_seconds": 5.0074955,
+      "process_cpu_seconds": 2.65428,
+      "process_cpu_fraction": 0.5300613849777798,
+      "events_per_second": 18024.37965246299,
+      "commits_per_second": 18024.37965246299,
+      "batch_latency": {
+        "count": 90257,
+        "p50_ms": 0.025125,
+        "p95_ms": 0.052792,
+        "p99_ms": 0.113959,
+        "max_ms": 26.158875
+      },
+      "commit_latency": {
+        "count": 90257,
+        "p50_ms": 0.020042,
+        "p95_ms": 0.046,
+        "p99_ms": 0.097459,
+        "max_ms": 26.150125
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.000000292,
+          "events_per_second": 16486.995185797405,
+          "wal_bytes": 4136512
+        },
+        {
+          "elapsed_seconds": 2.000025292,
+          "events_per_second": 18046.548836279093,
+          "wal_bytes": 4136512
+        },
+        {
+          "elapsed_seconds": 3.000037042,
+          "events_per_second": 18715.780089583946,
+          "wal_bytes": 4136512
+        },
+        {
+          "elapsed_seconds": 4.009449875,
+          "events_per_second": 18288.850108169765,
+          "wal_bytes": 4157112
+        },
+        {
+          "elapsed_seconds": 5.0074955,
+          "events_per_second": 18582.316815426148,
+          "wal_bytes": 4157112
+        }
+      ],
+      "wal_bytes_end": 4157112,
+      "wal_bytes_max_sampled": 4157112,
+      "database_bytes_before_final_checkpoint": 6160384,
+      "database_bytes_final": 6160384,
+      "final_checkpoint": {
+        "elapsed_ms": 0.366875,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 94427,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-off",
+        "journal": "WAL",
+        "synchronous": "OFF",
+        "batch_size": 1
+      },
+      "repeat": 2,
+      "order": 16,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 0,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 9110,
+        "commits": 9110,
+        "elapsed_seconds": 0.250014333
+      },
+      "events": 165769,
+      "commits": 165769,
+      "elapsed_seconds": 5.00002775,
+      "process_cpu_seconds": 4.643453,
+      "process_cpu_fraction": 0.9286854457957758,
+      "events_per_second": 33153.61599743121,
+      "commits_per_second": 33153.61599743121,
+      "batch_latency": {
+        "count": 165769,
+        "p50_ms": 0.024167,
+        "p95_ms": 0.052125,
+        "p99_ms": 0.129167,
+        "max_ms": 12.277542
+      },
+      "commit_latency": {
+        "count": 165769,
+        "p50_ms": 0.019084,
+        "p95_ms": 0.044917,
+        "p99_ms": 0.103208,
+        "max_ms": 12.268667
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.000004125,
+          "events_per_second": 32615.865459554978,
+          "wal_bytes": 4136512
+        },
+        {
+          "elapsed_seconds": 2.000069375,
+          "events_per_second": 30509.009287144014,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 3.000087625,
+          "events_per_second": 32177.41276221709,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 4.000092042,
+          "events_per_second": 37256.83543655788,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 5.00002775,
+          "events_per_second": 33209.13508171267,
+          "wal_bytes": 4144752
+        }
+      ],
+      "wal_bytes_end": 4144752,
+      "wal_bytes_max_sampled": 4144752,
+      "database_bytes_before_final_checkpoint": 11419648,
+      "database_bytes_final": 11440128,
+      "final_checkpoint": {
+        "elapsed_ms": 0.508334,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 174879,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "delete-extra",
+        "journal": "DELETE",
+        "synchronous": "EXTRA",
+        "batch_size": 1
+      },
+      "repeat": 2,
+      "order": 17,
+      "pragmas": {
+        "journal_mode": "delete",
+        "synchronous": 3,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 26,
+        "commits": 26,
+        "elapsed_seconds": 0.272432667
+      },
+      "events": 423,
+      "commits": 423,
+      "elapsed_seconds": 5.001298542,
+      "process_cpu_seconds": 0.973363,
+      "process_cpu_fraction": 0.1946220550174867,
+      "events_per_second": 84.57803437401758,
+      "commits_per_second": 84.57803437401758,
+      "batch_latency": {
+        "count": 423,
+        "p50_ms": 11.197458,
+        "p95_ms": 16.100375,
+        "p99_ms": 25.603208,
+        "max_ms": 41.916708
+      },
+      "commit_latency": {
+        "count": 423,
+        "p50_ms": 10.186,
+        "p95_ms": 14.526541,
+        "p99_ms": 20.381542,
+        "max_ms": 36.537042
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.00032625,
+          "events_per_second": 84.97227779436959,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 2.002566208,
+          "events_per_second": 83.81226404864613,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 3.005491125,
+          "events_per_second": 91.73169241342121,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 4.009464833,
+          "events_per_second": 81.67544562830325,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 5.001298542,
+          "events_per_second": 80.65868227110236,
+          "wal_bytes": 0
+        }
+      ],
+      "wal_bytes_end": 0,
+      "wal_bytes_max_sampled": 0,
+      "database_bytes_before_final_checkpoint": 40960,
+      "database_bytes_final": 40960,
+      "final_checkpoint": null,
+      "verified_rows": 449,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-28000",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 28000
+      },
+      "repeat": 2,
+      "order": 18,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 84000,
+        "commits": 3,
+        "elapsed_seconds": 0.286677458
+      },
+      "events": 1512000,
+      "commits": 54,
+      "elapsed_seconds": 5.059630542,
+      "process_cpu_seconds": 4.250143,
+      "process_cpu_fraction": 0.840010543204599,
+      "events_per_second": 298836.04888714425,
+      "commits_per_second": 10.672716031683722,
+      "batch_latency": {
+        "count": 54,
+        "p50_ms": 89.911833,
+        "p95_ms": 134.934958,
+        "p99_ms": 168.925666,
+        "max_ms": 168.925666
+      },
+      "commit_latency": {
+        "count": 54,
+        "p50_ms": 14.625041,
+        "p95_ms": 55.635792,
+        "p99_ms": 92.90875,
+        "max_ms": 92.90875
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.05054275,
+          "events_per_second": 266528.8966108233,
+          "wal_bytes": 5706232
+        },
+        {
+          "elapsed_seconds": 2.09689925,
+          "events_per_second": 294354.7442960406,
+          "wal_bytes": 5718592
+        },
+        {
+          "elapsed_seconds": 3.114634042,
+          "events_per_second": 330144.9480170665,
+          "wal_bytes": 5718592
+        },
+        {
+          "elapsed_seconds": 4.115883083,
+          "events_per_second": 279650.7048040209,
+          "wal_bytes": 5718592
+        },
+        {
+          "elapsed_seconds": 5.059630542,
+          "events_per_second": 326358.49459807656,
+          "wal_bytes": 5722712
+        }
+      ],
+      "wal_bytes_end": 5722712,
+      "wal_bytes_max_sampled": 5722712,
+      "database_bytes_before_final_checkpoint": 104783872,
+      "database_bytes_final": 104783872,
+      "final_checkpoint": {
+        "elapsed_ms": 0.380083,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 1596000,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 1
+      },
+      "repeat": 3,
+      "order": 19,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 90,
+        "commits": 90,
+        "elapsed_seconds": 0.252954625
+      },
+      "events": 1091,
+      "commits": 1091,
+      "elapsed_seconds": 5.106952666,
+      "process_cpu_seconds": 0.388242,
+      "process_cpu_fraction": 0.07602224367277893,
+      "events_per_second": 213.63033326379377,
+      "commits_per_second": 213.63033326379377,
+      "batch_latency": {
+        "count": 1091,
+        "p50_ms": 3.017083,
+        "p95_ms": 4.84575,
+        "p99_ms": 10.868,
+        "max_ms": 753.137625
+      },
+      "commit_latency": {
+        "count": 1091,
+        "p50_ms": 2.945417,
+        "p95_ms": 4.668458,
+        "p99_ms": 10.8005,
+        "max_ms": 753.039125
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.000612666,
+          "events_per_second": 286.8242725202521,
+          "wal_bytes": 2463792
+        },
+        {
+          "elapsed_seconds": 2.001651208,
+          "events_per_second": 319.6680113441626,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 3.002505208,
+          "events_per_second": 351.69964850018084,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 4.527553375,
+          "events_per_second": 85.24320923956758,
+          "wal_bytes": 4124152
+        },
+        {
+          "elapsed_seconds": 5.106952666,
+          "events_per_second": 3.451850961964674,
+          "wal_bytes": 4124152
+        }
+      ],
+      "wal_bytes_end": 4124152,
+      "wal_bytes_max_sampled": 4124152,
+      "database_bytes_before_final_checkpoint": 77824,
+      "database_bytes_final": 90112,
+      "final_checkpoint": {
+        "elapsed_ms": 503.400208,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 1181,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-10",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 10
+      },
+      "repeat": 3,
+      "order": 20,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 190,
+        "commits": 19,
+        "elapsed_seconds": 0.263766042
+      },
+      "events": 4770,
+      "commits": 477,
+      "elapsed_seconds": 5.0087565,
+      "process_cpu_seconds": 0.164513,
+      "process_cpu_fraction": 0.03284507841417326,
+      "events_per_second": 952.3321806520241,
+      "commits_per_second": 95.23321806520242,
+      "batch_latency": {
+        "count": 477,
+        "p50_ms": 10.137834,
+        "p95_ms": 18.238333,
+        "p99_ms": 24.978167,
+        "max_ms": 37.61875
+      },
+      "commit_latency": {
+        "count": 477,
+        "p50_ms": 10.06025,
+        "p95_ms": 18.092167,
+        "p99_ms": 24.867917,
+        "max_ms": 37.567083
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.007973375,
+          "events_per_second": 823.4344483553447,
+          "wal_bytes": 1058872
+        },
+        {
+          "elapsed_seconds": 2.011877542,
+          "events_per_second": 826.7721434809026,
+          "wal_bytes": 2142432
+        },
+        {
+          "elapsed_seconds": 3.01905975,
+          "events_per_second": 1002.7976983485395,
+          "wal_bytes": 3473192
+        },
+        {
+          "elapsed_seconds": 4.019139459,
+          "events_per_second": 1009.9195003265485,
+          "wal_bytes": 4132392
+        },
+        {
+          "elapsed_seconds": 5.0087565,
+          "events_per_second": 1101.436166558494,
+          "wal_bytes": 4132392
+        }
+      ],
+      "wal_bytes_end": 4132392,
+      "wal_bytes_max_sampled": 4132392,
+      "database_bytes_before_final_checkpoint": 221184,
+      "database_bytes_final": 323584,
+      "final_checkpoint": {
+        "elapsed_ms": 22.882625,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 4960,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-1000",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 1000
+      },
+      "repeat": 3,
+      "order": 21,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 16000,
+        "commits": 16,
+        "elapsed_seconds": 0.254572333
+      },
+      "events": 314000,
+      "commits": 314,
+      "elapsed_seconds": 5.0091205,
+      "process_cpu_seconds": 1.172154,
+      "process_cpu_fraction": 0.23400395338862381,
+      "events_per_second": 62685.65509653841,
+      "commits_per_second": 62.685655096538405,
+      "batch_latency": {
+        "count": 314,
+        "p50_ms": 14.216333,
+        "p95_ms": 31.830334,
+        "p99_ms": 60.95875,
+        "max_ms": 86.962083
+      },
+      "commit_latency": {
+        "count": 314,
+        "p50_ms": 10.566292,
+        "p95_ms": 28.407875,
+        "p99_ms": 58.256709,
+        "max_ms": 82.650833
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.003865875,
+          "events_per_second": 77699.62297005065,
+          "wal_bytes": 4132392
+        },
+        {
+          "elapsed_seconds": 2.007779834,
+          "events_per_second": 63750.48322243719,
+          "wal_bytes": 4190072
+        },
+        {
+          "elapsed_seconds": 3.034882084,
+          "events_per_second": 52575.09658848474,
+          "wal_bytes": 4198312
+        },
+        {
+          "elapsed_seconds": 4.04602175,
+          "events_per_second": 55383.051306386,
+          "wal_bytes": 4206552
+        },
+        {
+          "elapsed_seconds": 5.0091205,
+          "events_per_second": 64375.537814787946,
+          "wal_bytes": 4206552
+        }
+      ],
+      "wal_bytes_end": 4206552,
+      "wal_bytes_max_sampled": 4206552,
+      "database_bytes_before_final_checkpoint": 20381696,
+      "database_bytes_final": 21614592,
+      "final_checkpoint": {
+        "elapsed_ms": 40.397833,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 330000,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-28000",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 28000
+      },
+      "repeat": 3,
+      "order": 22,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 84000,
+        "commits": 3,
+        "elapsed_seconds": 0.287166333
+      },
+      "events": 1288000,
+      "commits": 46,
+      "elapsed_seconds": 5.017300875,
+      "process_cpu_seconds": 3.490159,
+      "process_cpu_fraction": 0.6956248164009099,
+      "events_per_second": 256711.73248106232,
+      "commits_per_second": 9.16827616003794,
+      "batch_latency": {
+        "count": 46,
+        "p50_ms": 101.498625,
+        "p95_ms": 161.020542,
+        "p99_ms": 192.575208,
+        "max_ms": 192.575208
+      },
+      "commit_latency": {
+        "count": 46,
+        "p50_ms": 28.849792,
+        "p95_ms": 85.599209,
+        "p99_ms": 122.844375,
+        "max_ms": 122.844375
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.10429375,
+          "events_per_second": 228200.15054871043,
+          "wal_bytes": 5706232
+        },
+        {
+          "elapsed_seconds": 2.123855541,
+          "events_per_second": 274627.7885966796,
+          "wal_bytes": 5718592
+        },
+        {
+          "elapsed_seconds": 3.223258416,
+          "events_per_second": 280152.07800870994,
+          "wal_bytes": 5718592
+        },
+        {
+          "elapsed_seconds": 4.324179291,
+          "events_per_second": 254332.5377493637,
+          "wal_bytes": 5718592
+        },
+        {
+          "elapsed_seconds": 5.017300875,
+          "events_per_second": 242381.71754870642,
+          "wal_bytes": 5718592
+        }
+      ],
+      "wal_bytes_end": 5718592,
+      "wal_bytes_max_sampled": 5718592,
+      "database_bytes_before_final_checkpoint": 88211456,
+      "database_bytes_final": 90066944,
+      "final_checkpoint": {
+        "elapsed_ms": 16.428334,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 1372000,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-full-batch-100",
+        "journal": "WAL",
+        "synchronous": "FULL",
+        "batch_size": 100
+      },
+      "repeat": 3,
+      "order": 23,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 2300,
+        "commits": 23,
+        "elapsed_seconds": 0.259199708
+      },
+      "events": 56100,
+      "commits": 561,
+      "elapsed_seconds": 5.001730042,
+      "process_cpu_seconds": 0.491179,
+      "process_cpu_fraction": 0.09820182134491935,
+      "events_per_second": 11216.119128566115,
+      "commits_per_second": 112.16119128566115,
+      "batch_latency": {
+        "count": 561,
+        "p50_ms": 8.697625,
+        "p95_ms": 16.178792,
+        "p99_ms": 31.52,
+        "max_ms": 39.579167
+      },
+      "commit_latency": {
+        "count": 561,
+        "p50_ms": 8.13525,
+        "p95_ms": 15.68275,
+        "p99_ms": 30.947291,
+        "max_ms": 38.019125
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.002644,
+          "events_per_second": 9973.629723012355,
+          "wal_bytes": 3436112
+        },
+        {
+          "elapsed_seconds": 2.012678917,
+          "events_per_second": 9207.602473410332,
+          "wal_bytes": 4128272
+        },
+        {
+          "elapsed_seconds": 3.015932292,
+          "events_per_second": 9568.868881203614,
+          "wal_bytes": 4128272
+        },
+        {
+          "elapsed_seconds": 4.026044834,
+          "events_per_second": 8711.900539890534,
+          "wal_bytes": 4140632
+        },
+        {
+          "elapsed_seconds": 5.001730042,
+          "events_per_second": 18858.541514344655,
+          "wal_bytes": 4144752
+        }
+      ],
+      "wal_bytes_end": 4144752,
+      "wal_bytes_max_sampled": 4144752,
+      "database_bytes_before_final_checkpoint": 3215360,
+      "database_bytes_final": 3784704,
+      "final_checkpoint": {
+        "elapsed_ms": 12.474875,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 58400,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "delete-extra",
+        "journal": "DELETE",
+        "synchronous": "EXTRA",
+        "batch_size": 1
+      },
+      "repeat": 3,
+      "order": 24,
+      "pragmas": {
+        "journal_mode": "delete",
+        "synchronous": 3,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 27,
+        "commits": 27,
+        "elapsed_seconds": 0.254304375
+      },
+      "events": 447,
+      "commits": 447,
+      "elapsed_seconds": 5.004752875,
+      "process_cpu_seconds": 0.824157,
+      "process_cpu_fraction": 0.16467486419097166,
+      "events_per_second": 89.31509929948339,
+      "commits_per_second": 89.31509929948339,
+      "batch_latency": {
+        "count": 447,
+        "p50_ms": 10.352083,
+        "p95_ms": 16.926916,
+        "p99_ms": 24.850333,
+        "max_ms": 65.874917
+      },
+      "commit_latency": {
+        "count": 447,
+        "p50_ms": 9.641834,
+        "p95_ms": 14.452833,
+        "p99_ms": 18.34,
+        "max_ms": 64.894792
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.001243833,
+          "events_per_second": 84.89440553687785,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 2.011424625,
+          "events_per_second": 76.22397951910375,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 3.017872083,
+          "events_per_second": 89.42344608713792,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 4.025849958,
+          "events_per_second": 99.20852677445922,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 5.004752875,
+          "events_per_second": 97.04741742025067,
+          "wal_bytes": 0
+        }
+      ],
+      "wal_bytes_end": 0,
+      "wal_bytes_max_sampled": 0,
+      "database_bytes_before_final_checkpoint": 45056,
+      "database_bytes_final": 45056,
+      "final_checkpoint": null,
+      "verified_rows": 474,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-off",
+        "journal": "WAL",
+        "synchronous": "OFF",
+        "batch_size": 1
+      },
+      "repeat": 3,
+      "order": 25,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 0,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 8710,
+        "commits": 8710,
+        "elapsed_seconds": 0.250010208
+      },
+      "events": 171982,
+      "commits": 171982,
+      "elapsed_seconds": 5.000004209,
+      "process_cpu_seconds": 4.640778,
+      "process_cpu_fraction": 0.9281548186792736,
+      "events_per_second": 34396.37104513485,
+      "commits_per_second": 34396.37104513485,
+      "batch_latency": {
+        "count": 171982,
+        "p50_ms": 0.022584,
+        "p95_ms": 0.05475,
+        "p99_ms": 0.130917,
+        "max_ms": 2.413792
+      },
+      "commit_latency": {
+        "count": 171982,
+        "p50_ms": 0.017416,
+        "p95_ms": 0.045,
+        "p99_ms": 0.106375,
+        "max_ms": 2.407792
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.000005459,
+          "events_per_second": 32098.824772515567,
+          "wal_bytes": 4136512
+        },
+        {
+          "elapsed_seconds": 2.000060334,
+          "events_per_second": 32830.19844286045,
+          "wal_bytes": 4136512
+        },
+        {
+          "elapsed_seconds": 3.000064542,
+          "events_per_second": 33696.85820362068,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 4.000070459,
+          "events_per_second": 36549.78373492964,
+          "wal_bytes": 4144752
+        },
+        {
+          "elapsed_seconds": 5.000004209,
+          "events_per_second": 36806.438426545756,
+          "wal_bytes": 4144752
+        }
+      ],
+      "wal_bytes_end": 4144752,
+      "wal_bytes_max_sampled": 4144752,
+      "database_bytes_before_final_checkpoint": 11816960,
+      "database_bytes_final": 11825152,
+      "final_checkpoint": {
+        "elapsed_ms": 0.363458,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 180692,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "delete-full",
+        "journal": "DELETE",
+        "synchronous": "FULL",
+        "batch_size": 1
+      },
+      "repeat": 3,
+      "order": 26,
+      "pragmas": {
+        "journal_mode": "delete",
+        "synchronous": 2,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 27,
+        "commits": 27,
+        "elapsed_seconds": 0.252136125
+      },
+      "events": 479,
+      "commits": 479,
+      "elapsed_seconds": 5.009502542,
+      "process_cpu_seconds": 0.852002,
+      "process_cpu_fraction": 0.17007716691562866,
+      "events_per_second": 95.61827666201033,
+      "commits_per_second": 95.61827666201033,
+      "batch_latency": {
+        "count": 479,
+        "p50_ms": 9.991125,
+        "p95_ms": 14.954875,
+        "p99_ms": 26.410167,
+        "max_ms": 47.349125
+      },
+      "commit_latency": {
+        "count": 479,
+        "p50_ms": 9.295042,
+        "p95_ms": 11.864792,
+        "p99_ms": 21.127417,
+        "max_ms": 36.950584
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.006588792,
+          "events_per_second": 92.39125324971828,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 2.013036292,
+          "events_per_second": 98.36578659095481,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 3.015468792,
+          "events_per_second": 101.7524870751896,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 4.018351542,
+          "events_per_second": 99.71255363600581,
+          "wal_bytes": 0
+        },
+        {
+          "elapsed_seconds": 5.009502542,
+          "events_per_second": 85.75888033205838,
+          "wal_bytes": 0
+        }
+      ],
+      "wal_bytes_end": 0,
+      "wal_bytes_max_sampled": 0,
+      "database_bytes_before_final_checkpoint": 45056,
+      "database_bytes_final": 45056,
+      "final_checkpoint": null,
+      "verified_rows": 506,
+      "integrity": "ok"
+    },
+    {
+      "case": {
+        "name": "wal-normal",
+        "journal": "WAL",
+        "synchronous": "NORMAL",
+        "batch_size": 1
+      },
+      "repeat": 3,
+      "order": 27,
+      "pragmas": {
+        "journal_mode": "wal",
+        "synchronous": 1,
+        "fullfsync": 1,
+        "checkpoint_fullfsync": 1,
+        "wal_autocheckpoint": 1000,
+        "page_size": 4096,
+        "cache_size": -8192,
+        "mmap_size": 0,
+        "locking_mode": "normal"
+      },
+      "warmup": {
+        "events": 4170,
+        "commits": 4170,
+        "elapsed_seconds": 0.25161375
+      },
+      "events": 94890,
+      "commits": 94890,
+      "elapsed_seconds": 5.001704334,
+      "process_cpu_seconds": 2.99742,
+      "process_cpu_fraction": 0.5992797254376852,
+      "events_per_second": 18971.53323417537,
+      "commits_per_second": 18971.53323417537,
+      "batch_latency": {
+        "count": 94890,
+        "p50_ms": 0.026708,
+        "p95_ms": 0.057917,
+        "p99_ms": 0.11225,
+        "max_ms": 18.459458
+      },
+      "commit_latency": {
+        "count": 94890,
+        "p50_ms": 0.0215,
+        "p95_ms": 0.050292,
+        "p99_ms": 0.096084,
+        "max_ms": 18.454458
+      },
+      "timeline": [
+        {
+          "elapsed_seconds": 1.000021584,
+          "events_per_second": 19244.584624885458,
+          "wal_bytes": 4136512
+        },
+        {
+          "elapsed_seconds": 2.000041542,
+          "events_per_second": 18131.638128766226,
+          "wal_bytes": 4136512
+        },
+        {
+          "elapsed_seconds": 3.003932167,
+          "events_per_second": 18497.034973306978,
+          "wal_bytes": 4136512
+        },
+        {
+          "elapsed_seconds": 4.003956125,
+          "events_per_second": 20183.516443313052,
+          "wal_bytes": 4157112
+        },
+        {
+          "elapsed_seconds": 5.001704334,
+          "events_per_second": 18802.338937598633,
+          "wal_bytes": 4157112
+        }
+      ],
+      "wal_bytes_end": 4157112,
+      "wal_bytes_max_sampled": 4157112,
+      "database_bytes_before_final_checkpoint": 6463488,
+      "database_bytes_final": 6463488,
+      "final_checkpoint": {
+        "elapsed_ms": 0.292917,
+        "busy": 0,
+        "log_frames": 0,
+        "checkpointed_frames": 0
+      },
+      "verified_rows": 99060,
+      "integrity": "ok"
+    }
+  ],
+  "source": {
+    "benchmark_sha256": "cbfeede9d592ae4954e74298dd3e7d631e30e838323c695d8f56c28811651dc3",
+    "git_commit": null,
+    "git_dirty": true
+  },
+  "schema": "CREATE TABLE payment_events (\n    event_id TEXT PRIMARY KEY NOT NULL,\n    amount_minor INTEGER NOT NULL CHECK (amount_minor > 0),\n    status TEXT NOT NULL CHECK (status IN ('captured', 'refunded', 'failed'))\n);",
+  "finished_at": "2026-10-23T12:46:06.789418+00:00"
+}
